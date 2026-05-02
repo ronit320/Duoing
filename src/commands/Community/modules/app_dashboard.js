@@ -159,7 +159,7 @@ export default {
                 roles.length === 0;
 
             if (isCompletelyUnconfigured) {
-                throw new TitanBotError(
+                throw new DuoingBotError(
                     'Applications system not set up',
                     ErrorTypes.CONFIGURATION,
                     'The applications system has not been configured yet. Please run `/app-admin setup` to create your first application.',
@@ -187,9 +187,9 @@ export default {
             await showApplicationDashboard(interaction, defaultRole, settings, roles, guildId, client);
 
         } catch (error) {
-            if (error instanceof TitanBotError) throw error;
+            if (error instanceof TDuoingBotError) throw error;
             logger.error('Unexpected error in app_dashboard:', error);
-            throw new TitanBotError(
+            throw new DuoingBotError(
                 `Applications dashboard failed: ${error.message}`,
                 ErrorTypes.UNKNOWN,
                 'Failed to open the applications dashboard.',
@@ -331,7 +331,7 @@ async function showApplicationDashboard(rootInteraction, selectedRole, settings,
                 inline: false 
             },
         )
-        .setFooter({ text: 'Dashboard closes after 10 minutes of inactivity' })
+        .setFooter({ text: 'Dashboard closes after 11 minutes of inactivity' })
         .setTimestamp();
 
     // Create dropdown button with customization options
@@ -403,14 +403,14 @@ function setupCollectors(interaction, settings, roles, guildId, client, selected
                     break;
             }
         } catch (error) {
-            if (error instanceof TitanBotError) {
+            if (error instanceof DuoingBotError) {
                 logger.debug(`Applications config validation error: ${error.message}`);
             } else {
                 logger.error('Unexpected applications dashboard error:', error);
             }
 
             const errorMessage =
-                error instanceof TitanBotError
+                error instanceof DuoingBotError
                     ? error.userMessage || 'An error occurred while processing your selection.'
                     : 'An unexpected error occurred while updating the configuration.';
 
@@ -492,7 +492,7 @@ function setupCollectors(interaction, settings, roles, guildId, client, selected
             if (reason === 'time') {
                 const timeoutEmbed = new EmbedBuilder()
                     .setTitle('⏱️ Configuration Timeout')
-                    .setDescription('This dashboard session has timed out due to inactivity (10 minutes).\n\nTo continue configuring your applications, please run the command again.')
+                    .setDescription('This dashboard session has timed out due to inactivity (11 minutes).\n\nTo continue configuring your applications, please run the command again.')
                     .setColor(getColor('warning'));
                     
                 await InteractionHelper.safeEditReply(interaction, {
@@ -590,7 +590,7 @@ function setupCollectors(interaction, settings, roles, guildId, client, selected
             if (reason === 'time') {
                 const timeoutEmbed = new EmbedBuilder()
                     .setTitle('⏱️ Configuration Timeout')
-                    .setDescription('This dashboard session has timed out due to inactivity (10 minutes).\n\nTo continue configuring your applications, please run the command again.')
+                    .setDescription('This dashboard session has timed out due to inactivity (11 minutes).\n\nTo continue configuring your applications, please run the command again.')
                     .setColor(getColor('warning'));
                     
                 await InteractionHelper.safeEditReply(interaction, {
@@ -660,7 +660,7 @@ function setupCollectors(interaction, settings, roles, guildId, client, selected
             if (reason === 'time') {
                 const timeoutEmbed = new EmbedBuilder()
                     .setTitle('⏱️ Configuration Timeout')
-                    .setDescription('This dashboard session has timed out due to inactivity (10 minutes).\n\nTo continue configuring your applications, please run the command again.')
+                    .setDescription('This dashboard session has timed out due to inactivity (11 minutes).\n\nTo continue configuring your applications, please run the command again.')
                     .setColor(getColor('warning'));
                     
                 await InteractionHelper.safeEditReply(interaction, {
