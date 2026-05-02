@@ -184,7 +184,7 @@ class TitanBot extends Client {
 
     app.get('/', (req, res) => {
       res.status(200).json({ 
-        message: 'TitanBot System Online',
+        message: 'DuoingBot System Online',
         version: '2.0.0',
         timestamp: new Date().toISOString()
       });
@@ -356,7 +356,7 @@ class TitanBot extends Client {
 }
 
 try {
-  const bot = new TitanBot();
+  const bot = new DuoingBot();
   
   const setupShutdown = () => {
     process.on('SIGTERM', () => bot.shutdown('SIGTERM'));
@@ -380,7 +380,7 @@ try {
   process.exit(1);
 }
 
-export default TitanBot;
+export default DuoingBot;
 
 
 
